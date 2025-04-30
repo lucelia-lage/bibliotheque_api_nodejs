@@ -31,7 +31,7 @@ try {
 
 bookRouter.get('/books/:id', async (req, res) => { // je cherche un livre avec un id
 try {
-    const book = await bookModel.find({_id: req.body.id}); // ça veut dire que je cherche un livre avec l'id qui est dans le body de la requete
+    const book = await bookModel.find({_id: req.params.id}); // envoyer via un paramètre de requête! 
     res.json({ book: book }); // je renvoie le livre
 } catch (error) {
     console.log(error)
@@ -41,7 +41,7 @@ try {
 
 bookRouter.get('/books/.../:title', async (req, res) => { // je cherche un livre avec un titre 
 try {
-    const book = await bookModel.find({title: req.body.title}); // ça veut dire que je cherche un livre avec le titre qui est dans le body de la requete
+    const book = await bookModel.find({title: req.params.title}); // envoyer via un paramètre de requête!
     res.json({ books: books}); // je renvoie le livre
 }catch (error) {
     console.log(error)
@@ -69,7 +69,7 @@ try {
 
 bookRouter.delete('/books/:id', async (req, res) => { // je cherche un livre avec un id
 try {
-    const book = await bookModel.deleteOne({ _id: req.body.id }); // je cherche un livre avec l'id qui est dans le body de la requete
+    const book = await bookModel.deleteOne({ _id: req.params.id }); // je cherche un livre avec l'id qui est dans le parametre de la requete
     res.json({ message: 'le livre a été supprimé avec succès', book: book }) // je renvoie le livre
 }catch (error) {
     console.log(error)
