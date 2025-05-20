@@ -2,9 +2,11 @@ const express = require('express');
 const port = 3000; 
 const mongoose = require('mongoose'); 
 const bookRouter = require('./routers/bookRouter');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json()); 
+app.use(cors());
 app.use(bookRouter)
 
 app.listen(port, (err) => {

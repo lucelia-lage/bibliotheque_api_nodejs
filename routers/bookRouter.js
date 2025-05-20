@@ -1,80 +1,76 @@
 const bookModel = require('../models/bookModel');
+const express = require('express');
+const bookRouter = express.Router();
 
-const bookRouter = require('express').Router();
-
+// Ajouter un nouveau livre
 bookRouter.post('/books', async (req, res) => {
-try {   
+  try {
     const book = new bookModel({
+      title: req.body.title,
+      author: req.body.author,
+      publishedDate: req.body.publishedDate,
+      genre: req.body.genre,
+    });
+    await book.save();
+    res.json({ message: 'Livre ajouté avec succès !', book });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error, message: "Erreur lors de l'ajout du livre." });
+  }
+});
+
+// Récupérer tous les livres
+bookRouter.get('/books', async (req, res) => {
+  try {
+    const books = await bookModel.find();
+    res.json({ books });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error, message: "Erreur lors de la récupération des livres." });
+  }
+});
+
+// Récupérer un livre par ID
+bookRouter.get('/books/:id', async (req, res) => {
+  try {
+    const book = await bookModel.findById(req.params.id);
+    if (!book) return res.status(404).json({ message: 'Livre non trouvé.' });
+    res.json({ book });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error, message: 'Erreur lors de la récupération du livre.' });
+  }
+});
+
+// Mettre à jour un livre
+bookRouter.put('/books/:id', async (req, res) => {
+  try {
+    const updated = await bookModel.updateOne(
+      { _id: req.params.id },
+      {
         title: req.body.title,
         author: req.body.author,
         publishedDate: req.body.publishedDate,
         genre: req.body.genre,
-    })
-    await book.save() 
-    res.json({ message: 'Le livre a été ajouté avec succès!', book: book })
-}
-catch (error) {
-    console.log(error)
-    res.json({ err : error,  message: "Une erreur est survenue lors de l'ajout du livre."})
-}
-});
-
-bookRouter.get('/books', async (req, res) => { // je cherche tous les livres
-try {
-    const books = await bookModel.find() 
-    res.json({books: books }); // je renvoie tous les livres
-}catch (error) {
-    console.log(error)
-    res.json({ err : error,  message: "Une erreur est survenue lors de la récupération des livres."})
-}
-});
-
-bookRouter.get('/books/:id', async (req, res) => { // je cherche un livre avec un id
-try {
-    const book = await bookModel.find({_id: req.params.id}); // envoyer via un paramètre de requête! 
-    res.json({ book: book }); // je renvoie le livre
-} catch (error) {
-    console.log(error)
-    res.json({ err : error,  message: 'Une erreur est survenue lors de la récupération du livre.'})
-}
-});
-
-bookRouter.get('/books/.../:title', async (req, res) => { // je cherche un livre avec un titre 
-try {
-    const book = await bookModel.find({title: req.params.title}); // envoyer via un paramètre de requête!
-    res.json({ books: books}); // je renvoie le livre
-}catch (error) {
-    console.log(error)
-    res.json({ err : error,  message: 'Une erreur est survenue lors de la récupération du livre.'})
-}
-});
-
-bookRouter.put('/books/:id', async (req, res) => { // je cherche un livre avec un id
-try {
-    const book = await bookModel.updateOne( 
-        { _id: req.body.id }, // je cherche un livre avec l'id qui est dans le body de la requete
-        {
-            title: req.body.title, 
-            author: req.body.author,
-            publishedDate: req.body.publishedDate,
-            genre: req.body.genre,
-        }
+      }
     );
-    res.json({ message: 'Le livre a été mis à jour avec succès!', book: book }) // je renvoie le livre
-}catch (error) {
-    console.log(error)
-    res.json({ err : error,  message: 'Une erreur est survenue lors de la mise à jour du livre.'})
-}
+    res.json({ message: 'Livre mis à jour avec succès.', updated });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error, message: "Erreur lors de la mise à jour du livre." });
+  }
 });
 
-bookRouter.delete('/books/:id', async (req, res) => { // je cherche un livre avec un id
-try {
-    const book = await bookModel.deleteOne({ _id: req.params.id }); // je cherche un livre avec l'id qui est dans le parametre de la requete
-    res.json({ message: 'Le livre a été supprimé avec succès!', book: book }) // je renvoie le livre
-}catch (error) {
-    console.log(error)
-    res.json({ err : error,  message: 'Une erreur est survenue lors de la suppression du livre!'})
-}
+// Supprimer un livre
+bookRouter.delete('/books/:id', async (req, res) => {
+  try {
+    const deleted = await bookModel.deleteOne({ _id: req.params.id });
+    res.json({ message: 'Livre supprimé avec succès.', deleted });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error, message: 'Erreur lors de la suppression du livre.' });
+  }
 });
-module.exports = bookRouter; // je l'exporte pour l'utiliser dans le server.js
+
+module.exports = bookRouter;
 
