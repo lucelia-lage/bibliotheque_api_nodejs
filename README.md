@@ -1,29 +1,39 @@
 API Livre - Node.js / Express / MongoDB
 
-Cette API permet de gérer une collection de livres avec les opérations classiques : création, lecture, mise à jour et suppression (CRUD).
+Cette API permet de gérer une collection de livres avec les opérations classiques de CRUD (Créer, Lire, Mettre à jour, Supprimer).
 
- Fonctionnalités
+Fonctionnalités
 
-- `POST /books` : ajouter un livre  
-- `GET /books` : récupérer tous les livres  
-- `GET /books/:id` : récupérer un livre par ID  
-- `GET /books/title/:title` : récupérer un livre par titre  
-- `PUT /books/:id` : modifier un livre  
-- `DELETE /books/:id` : supprimer un livre  
+- `POST /books` : Ajouter un nouveau livre  
+- `GET /books` : Récupérer tous les livres  
+- `GET /books/:id` : Récupérer un livre par son ID  
+- (À implémenter : `GET /books/title/:title` pour rechercher par titre) 
+- `PUT /books/:id` : *(Prévu)* Modifier un livre existant  
+- `DELETE /books/:id` : *(Prévu)* Supprimer un livre  
 
-Chaque livre contient les champs suivants :  
-- `title` (String)  
-- `author` (String)  
-- `publishedDate` (Date)  
-- `genre` (String)  
+Les routes de modification et suppression ne sont pas encore intégrées. Elles seront ajoutées prochainement.
 
-Tous les champs sont requis pour l'ajout d'un livre.
+Structure d’un livre : 
 
- Améliorations futures
+Chaque document `book` contient les champs suivants, tous requis :
 
-- Utiliser des codes HTTP appropriés (`201`, `400`, `404`, etc.)  
-- Ajouter une validation plus poussée des champs (longueur, format, etc.)  
-- Permettre la recherche par mot-clé dans les titres  
-- Implémenter la pagination pour les listes de livres  
-- Utiliser un fichier `.env` pour les variables d’environnement  
-- Améliorer les messages d’erreur et la gestion des exceptions
+- `title` (String) — Titre du livre  
+- `author` (String) — Auteur  
+- `publishedDate` (Date) — Date de publication  
+- `genre` (String) — Genre littéraire  
+
+Technologies utilisées
+
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+
+Améliorations futures possibles
+
+- Retourner les bons codes HTTP (`201`, `400`, `404`, etc.)  
+- Implémenter la route `GET /books/title/:title` pour rechercher par titre  
+- Validation améliorée des champs (format de date, longueur minimale, REGEX, etc.)  
+- Ajouter les fonctionnalités de modification et suppression
+- Utiliser un fichier `.env` pour les variables sensibles (connexion à MongoDB, port, etc.)  
+- Améliorer la gestion des erreurs (messages plus clairs, gestion centralisée)
