@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
-    required: [true, 'le titre est requis'],
+    required: [true, 'Le titre est requis.'],
     },
     author : {      
         type: String,
-        required: [true, 'l\'auteur est requis'],
+        required: [true, "L'auteur est requis."],
     },
     publishedDate: {
         type: Date,
-        required: [true, 'la date de publication est requise'],
+        required: [true, 'La date de publication est requise.'],
     },
     genre: {
         type: String,
-        required: [true, 'le genre est requis'],
+        required: [true, 'Le genre est requis.'],
     },
 },
 );
