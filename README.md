@@ -16,11 +16,7 @@ Il offre des fonctionnalités pour ajouter, modifier, supprimer et consulter des
 ---
 
 ## Installation
-
-1. Clone le dépôt :  
-   ```bash
-   git clone https://github.com/ton-utilisateur/ton-repo.git
-   cd ton-repo
+Clone le dépôt
 Installe les dépendances :
 npm install
 Configure la connexion à MongoDB (exemple dans .env ou fichier config)
