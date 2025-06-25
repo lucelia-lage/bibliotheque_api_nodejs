@@ -1,39 +1,58 @@
-API Livre - Node.js / Express / MongoDB
+# Bibliothèque de Livres - API Node.js
 
-Cette API permet de gérer une collection de livres avec les opérations classiques de CRUD (Créer, Lire, Mettre à jour, Supprimer).
+Ce projet est une API RESTful développée avec Node.js, Express et MongoDB, permettant de gérer une bibliothèque de livres.  
+Il offre des fonctionnalités pour ajouter, modifier, supprimer et consulter des livres.
 
-Fonctionnalités
+---
 
-- `POST /books` : Ajouter un nouveau livre  
-- `GET /books` : Récupérer tous les livres  
-- `GET /books/:id` : Récupérer un livre par son ID  
-- (À implémenter : `GET /books/title/:title` pour rechercher par titre) 
-- `PUT /books/:id` : *(Prévu)* Modifier un livre existant  
-- `DELETE /books/:id` : *(Prévu)* Supprimer un livre  
+## Fonctionnalités
 
-Les routes de modification et suppression ne sont pas encore intégrées. Elles seront ajoutées prochainement.
+- Liste des livres
+- Ajout d’un nouveau livre
+- Modification d’un livre existant
+- Suppression d’un livre
+- Interface web simple pour interagir avec l’API
 
-Structure d’un livre : 
+---
 
-Chaque document `book` contient les champs suivants, tous requis :
+## Installation
 
-- `title` (String) — Titre du livre  
-- `author` (String) — Auteur  
-- `publishedDate` (Date) — Date de publication  
-- `genre` (String) — Genre littéraire  
+1. Clone le dépôt :  
+   ```bash
+   git clone https://github.com/ton-utilisateur/ton-repo.git
+   cd ton-repo
+Installe les dépendances :
+npm install
+Configure la connexion à MongoDB (exemple dans .env ou fichier config)
+Exemple :
+MONGODB_URI=mongodb://localhost:27017/bibliotheque
+Lance le serveur :
+npm start
+Utilisation
+L’API est accessible sur http://localhost:3000 (ou autre port configuré)
 
-Technologies utilisées
+Utilise l’interface web disponible à la racine (index.html) pour gérer les livres
 
-- [Node.js](https://nodejs.org/)
-- [Express](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/)
-- [Mongoose](https://mongoosejs.com/)
+Ou interagis avec l’API via des requêtes HTTP (GET, POST, PUT, DELETE)
+
+Structure du projet
+server.js — point d’entrée du serveur Express
+
+routers/ — routes pour les livres
+
+models/ — modèles Mongoose
+
+public/ — fichiers statiques (HTML, CSS, JS)
+
+package.json — gestion des dépendances
+
+Contributions
+N’hésite pas à contribuer via des issues ou pull requests !
 
 Améliorations futures possibles
 
 - Retourner les bons codes HTTP (`201`, `400`, `404`, etc.)  
 - Implémenter la route `GET /books/title/:title` pour rechercher par titre  
-- Validation améliorée des champs (format de date, longueur minimale, REGEX, etc.)  
-- Ajouter les fonctionnalités de modification et suppression
+- Validation améliorée des champs (longueur minimale, REGEX, etc.)  
 - Utiliser un fichier `.env` pour les variables sensibles (connexion à MongoDB, port, etc.)  
 - Améliorer la gestion des erreurs (messages plus clairs, gestion centralisée)
