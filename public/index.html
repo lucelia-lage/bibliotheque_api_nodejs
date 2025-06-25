@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion de Livres</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>📚 Gestion de Livres</h1>
+
+  <form id="bookForm">
+    <h2 id="formTitle">➕ Ajouter un livre</h2>
+    <input type="hidden" id="bookId" />
+    <input type="text" id="title" placeholder="Titre" required />
+    <input type="text" id="author" placeholder="Auteur" required />
+    <input type="date" id="publishedDate" required />
+    <input type="text" id="genre" placeholder="Genre" required />
+    <button type="submit" id="submitBtn">Ajouter</button>
+  </form>
+
+  <div id="booksContainer"></div>
+
+  <!-- MODALE DE MODIFICATION -->
+  <div id="editModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" id="closeEditModal">&times;</span>
+      <h2>Modifier le livre</h2>
+      <form id="editBookForm">
+        <input type="hidden" id="editBookId" />
+        <label for="editTitle">Titre</label>
+        <input type="text" id="editTitle" required />
+
+        <label for="editAuthor">Auteur</label>
+        <input type="text" id="editAuthor" required />
+
+        <label for="editPublishedDate">Date de publication</label>
+        <input type="date" id="editPublishedDate" required />
+
+        <label for="editGenre">Genre</label>
+        <input type="text" id="editGenre" required />
+
+        <button type="submit">Enregistrer</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

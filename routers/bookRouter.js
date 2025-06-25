@@ -49,23 +49,24 @@ try {
 }
 });
 
-bookRouter.put('/books/:id', async (req, res) => { // je cherche un livre avec un id
-try {
-    const book = await bookModel.updateOne( 
-        { _id: req.body.id }, // je cherche un livre avec l'id qui est dans le body de la requete
-        {
-            title: req.body.title, 
-            author: req.body.author,
-            publishedDate: req.body.publishedDate,
-            genre: req.body.genre,
-        }
+bookRouter.put('/books/:id', async (req, res) => {
+  try {
+    const book = await bookModel.updateOne(
+      { _id: req.params.id },
+      {
+        title: req.body.title,
+        author: req.body.author,
+        publishedDate: req.body.publishedDate,
+        genre: req.body.genre,
+      }
     );
-    res.json({ message: 'le livre a été mis à jour avec succès', book: book }) // je renvoie le livre
-}catch (error) {
-    console.log(error)
-    res.json({ err : error,  message: 'une erreur est survenue lors de la mise à jour du livre'})
-}
+    res.json({ message: 'le livre a été mis à jour avec succès', book: book });
+  } catch (error) {
+    console.log(error);
+    res.json({ err: error, message: 'une erreur est survenue lors de la mise à jour du livre' });
+  }
 });
+
 
 bookRouter.delete('/books/:id', async (req, res) => { // je cherche un livre avec un id
 try {

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bookRouter = require('./routers/bookRouter');
 
 const app = express();
+app.use(express.static('public'));
 app.use(express.json()); 
 app.use(bookRouter)
 
